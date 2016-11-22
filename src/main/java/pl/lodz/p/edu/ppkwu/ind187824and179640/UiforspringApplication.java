@@ -1,4 +1,4 @@
-package pl.lodz.p.edu.ppkwu.187824and179640;
+package pl.lodz.p.edu.ppkwu.ind187824and179640;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

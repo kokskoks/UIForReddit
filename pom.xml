@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>pl.lodz.p.edu.ppkwu.187824and179640</groupId>
+	<groupId>pl.lodz.p.edu.ppkwu.ind187824and179640</groupId>
 	<artifactId>uiforspring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
