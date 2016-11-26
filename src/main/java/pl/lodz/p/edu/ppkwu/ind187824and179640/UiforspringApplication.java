@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import pl.lodz.p.iis.ppkwu.reddit.api.Callback;
 import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.News;
@@ -71,16 +73,19 @@ public class UiforspringApplication {
 						return new Result<T>() {
 							
 							@Override
+							@JsonProperty
 							public boolean succeeded() {
 								return true;
 							}
 							
 							@Override
+							@JsonProperty
 							public ResultStatus status() {
 								return ResultStatus.SUCCEEDED;
 							}
 							
 							@Override
+							@JsonProperty
 							public Optional<T> content() {
 								return  Optional.of(content);
 							}
@@ -91,6 +96,7 @@ public class UiforspringApplication {
 						Page<News> page = new Page<News>() {
 							
 							@Override
+							@JsonProperty
 							public List<News> content() {
 								
 								List<News> list = new ArrayList<>();
@@ -99,21 +105,25 @@ public class UiforspringApplication {
 									News news = new News() {
 										
 										@Override
+										@JsonProperty
 										public String title() {
 											return "title " + Math.random();
 										}
 										
 										@Override
+										@JsonProperty
 										public Optional<URL> thumbnailUrl() {
 											
 											return null;
 										}
 										
 										@Override
+										@JsonProperty
 										public User author() {
 											User user = new User() {
 												
 												@Override
+												@JsonProperty
 												public String login() {
 													return "User " + Math.random();
 												}
@@ -152,11 +162,13 @@ public class UiforspringApplication {
 						List<Category> categories = new ArrayList<>();
 						
 						for(int i = 0; i < 5; i++){
+							
 							Category category = new Category() {
 								
 								@Override
+								@JsonProperty
 								public String name() {
-									return "cat " + Math.random();
+									return "cat" + Math.random();
 								}
 							};
 							
