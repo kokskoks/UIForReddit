@@ -1,27 +1,12 @@
 package pl.lodz.p.edu.ppkwu.ind187824and179640;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.Executor;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import pl.lodz.p.iis.ppkwu.reddit.api.Callback;
-import pl.lodz.p.iis.ppkwu.reddit.api.Category;
-import pl.lodz.p.iis.ppkwu.reddit.api.News;
-import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.RedditBuilder;
-import pl.lodz.p.iis.ppkwu.reddit.api.Result;
-import pl.lodz.p.iis.ppkwu.reddit.api.ResultStatus;
-import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
-import pl.lodz.p.iis.ppkwu.reddit.api.User;
+import pl.lodz.p.iis.ppkwu.reddit.backend.RedditBuilderImpl;
 
 @SpringBootApplication
 public class UiforspringApplication {
@@ -36,6 +21,12 @@ public class UiforspringApplication {
 	}
 	
 	@Bean
+	public RedditBuilder redditBuilder(){
+		return new RedditBuilderImpl();
+	}
+	
+	
+/*	@Bean
 	public RedditBuilder mockRedditBuilder(){
 		return new RedditBuilder() {
 			
@@ -180,6 +171,6 @@ public class UiforspringApplication {
 				};
 			}
 		};
-	}
+	}*/
 	
 }
