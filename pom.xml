@@ -75,7 +75,7 @@
         <dependency>
             <groupId>com.github.pl187746</groupId>
             <artifactId>reddit_backend</artifactId>
-            <version>ver.0.0.2</version>
+            <version>ver.0.0.4</version>
         </dependency>
 	</dependencies>
 

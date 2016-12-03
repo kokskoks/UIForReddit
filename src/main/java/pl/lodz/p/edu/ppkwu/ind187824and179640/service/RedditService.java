@@ -1,7 +1,6 @@
 package pl.lodz.p.edu.ppkwu.ind187824and179640.service;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +10,12 @@ import pl.lodz.p.edu.ppkwu.ind187824and179640.dto.CategoriesDto;
 import pl.lodz.p.edu.ppkwu.ind187824and179640.dto.PageDto;
 import pl.lodz.p.edu.ppkwu.ind187824and179640.mapper.Mapper;
 import pl.lodz.p.iis.ppkwu.reddit.api.Category;
-import pl.lodz.p.iis.ppkwu.reddit.api.News;
-import pl.lodz.p.iis.ppkwu.reddit.api.Page;
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
-import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.SubredditBuilder;
+import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 
 @Service
 public class RedditService {
@@ -36,29 +35,15 @@ public class RedditService {
 		
 		reddit.loadCategoriesList((result) -> {
 		
-			
 			categories.setResult(mapper.mapCategories(result.content().get()));
 			});
 		
 	}
 
 	public void findSubredditWithCategory(String subredditName, String categoryName, DeferredResult<PageDto> deferredResult) {
-		Subreddit subreddit = new Subreddit() {
-			
-			@Override
-			public String title() {
-				return subredditName;
-			}
-		};
+		Subreddit subreddit = new SubredditBuilder().withTitle(subredditName).build();
 		
-		Category category = new Category() {
-			
-			@Override
-			public String name() {
-				return categoryName;
-			}
-		};
-		
+		Category category = new CategoryBuilder().withName(categoryName).build();
 		reddit.loadSubredditNews(subreddit, category, (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));
 		});
@@ -67,12 +52,7 @@ public class RedditService {
 
 	
 	public void findUserNews(String userName, DeferredResult<PageDto> deferredResult) {
-		User user = new User(){
-			@Override
-			public String login() {
-				return userName;
-			}
-		};
+		User user = new UserBuilder().withLogin(userName).build();
 		
 		reddit.loadUserNews(user, (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));

@@ -1,42 +1,54 @@
 <!doctype html>
-<html>
+<html ng-app="reddit">
 	<head>
-		<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css' />
-		<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" async></script>
 		<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+		<script src="reddit.js"></script>
+		<script src="formController.js"></script>
 		<title>Reddit</title>
 	</head>
-	<body>
-		<div  ng-app="reddit" ng-controller="formController">
+	<body >
+		<div  ng-controller="formController">
 			<div style="padding:20px;">
 				<label for="usr">User:</label> 
 				<input type="text" class="form-control" ng-model="user" id="usr">
-				<button type="button" class="btn btn-default">Search</button>
+				<button type="button" class="btn btn-default" ng-click="searchByUser(user)">Search</button>
 			</div>
 			<div style="padding:20px;">
 				<div style="float:left;">
 					<label for="subreddit">Subreddit:</label> 
 					<input type="text" class="form-control" ng-model="subreddit" id="subreddit">
-					<button type="button" class="btn btn-default" style="float:left;">Search</button>
+					<button type="button" class="btn btn-default" style="float:left;" ng-click="searchBySubreddit(subreddit,category)">Search</button>
 				</div>
 				<div class="form-group" style="float:left;">
 				  <label for="sel1">Category:</label>
-				  <select class="form-control" id="sel1">
-				    <option>1</option>
-				    <option>2</option>
-				    <option>3</option>
-				    <option>4</option>
-				  </select>
+					<select id="sel1" class="form-control" ng-model="category" ng-options="item.name for item in categories"></select>
 				</div>
 			</div>
 			<div style="padding: 100px 20px 20px 20px;">
 				<label for="keyword">Keyword:</label> 
 				<input type="text" class="form-control" ng-model="keyword" id="keyword" placeholder="Keywords separated by comma eg. 'hot,popular'">
-				<button type="button" class="btn btn-default">Search</button>
+				<button type="button" class="btn btn-default" ng-click="searchByKeywords(keyword)">Search</button>
 			</div>
+			<table class="table table-striped">
+			    <thead>
+			      <tr>
+			        <th>Picture</th>
+			        <th>Title</th>
+			        <th>User</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr ng-repeat="x in reddits">
+				    <td><img ng-src="{{ x.url }}"></td>
+				    <td>{{ x.title }}</td>
+				    <td>{{ x.user.userName }}</td>
+			      </tr>
+			    </tbody>
+			</table>
 		</div>
-	<script src="reddit.js"></script>
-	<script src="formController.js"></script>
+
 	</body>
 </html>
