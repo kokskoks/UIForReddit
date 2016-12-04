@@ -14,14 +14,12 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
 import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.SubredditBuilder;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.UserBuilder;
 
 @Service
 public class RedditService {
 
 	private final Reddit reddit;
-	
+
 	private final Mapper mapper;
 
 	@Autowired
@@ -32,40 +30,39 @@ public class RedditService {
 	}
 
 	public void findAllCategories(DeferredResult<CategoriesDto> categories) {
-		
+
 		reddit.loadCategoriesList((result) -> {
-		
+
 			categories.setResult(mapper.mapCategories(result.content().get()));
-			});
-		
+		});
+
 	}
 
-	public void findSubredditWithCategory(String subredditName, String categoryName, DeferredResult<PageDto> deferredResult) {
-		Subreddit subreddit = new SubredditBuilder().withTitle(subredditName).build();
-		
+	public void findSubredditWithCategory(String subredditName, String categoryName,
+			DeferredResult<PageDto> deferredResult) {
+		Subreddit subreddit = reddit.subredditWithName(subredditName);
+
 		Category category = new CategoryBuilder().withName(categoryName).build();
 		reddit.loadSubredditNews(subreddit, category, (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));
 		});
-		
+
 	}
 
-	
 	public void findUserNews(String userName, DeferredResult<PageDto> deferredResult) {
-		User user = new UserBuilder().withLogin(userName).build();
-		
+		User user = reddit.userWithLogin(userName);
+
 		reddit.loadUserNews(user, (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));
 		});
-		
+
 	}
-	
-	public void findNewsByKeywords(String[] keywords, DeferredResult<PageDto> deferredResult){
-		
+
+	public void findNewsByKeywords(String[] keywords, DeferredResult<PageDto> deferredResult) {
+
 		reddit.loadNewsByKeywords(Arrays.asList(keywords), (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));
 		});
 	}
-	
-	
+
 }

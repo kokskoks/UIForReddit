@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
-import pl.lodz.p.iis.ppkwu.reddit.api.RedditBuilder;
-import pl.lodz.p.iis.ppkwu.reddit.backend.RedditBuilderImpl;
+import pl.lodz.p.iis.ppkwu.reddit.api.Util;
 
 @SpringBootApplication
 public class UiforspringApplication {
@@ -16,12 +15,8 @@ public class UiforspringApplication {
 	}
 	
 	@Bean
-	public Reddit reddit(RedditBuilder redditBuilder){
-		return redditBuilder.build();
+	public Reddit reddit(){
+		return Util.redditBuilder().build();
 	}
-	
-	@Bean
-	public RedditBuilder redditBuilder(){
-		return new RedditBuilderImpl();
-	}
+
 }

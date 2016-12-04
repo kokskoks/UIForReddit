@@ -3,6 +3,7 @@ package pl.lodz.p.edu.ppkwu.ind187824and179640.mapper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -38,14 +39,18 @@ public class Mapper {
 
 	public NewsDto mapNews(News news) {
 		String title = news.title();
-		
-		User author = news.author();
-		
-		UserDto userDto = mapUser(author);
-	
+		String url = null;
 
-		
-		return new NewsDto(title, userDto, null);
+		if (news.thumbnailUrl().isPresent()) {
+			URL thumbnailUrl = news.thumbnailUrl().get();
+			url = thumbnailUrl.toString();
+		}
+
+		User author = news.author();
+
+		UserDto userDto = mapUser(author);
+
+		return new NewsDto(title, userDto, url);
 
 	}
 
