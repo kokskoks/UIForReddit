@@ -1,6 +1,7 @@
 package pl.lodz.p.edu.ppkwu.ind187824and179640.service;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import pl.lodz.p.iis.ppkwu.reddit.api.Category;
 import pl.lodz.p.iis.ppkwu.reddit.api.Reddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.Subreddit;
 import pl.lodz.p.iis.ppkwu.reddit.api.User;
-import pl.lodz.p.iis.ppkwu.reddit.backend.data.builders.CategoryBuilder;
 
 @Service
 public class RedditService {
@@ -21,6 +21,8 @@ public class RedditService {
 	private final Reddit reddit;
 
 	private final Mapper mapper;
+	
+	private List<Category> categoriesList;
 
 	@Autowired
 	public RedditService(Reddit reddit, Mapper mapper) {
@@ -32,8 +34,8 @@ public class RedditService {
 	public void findAllCategories(DeferredResult<CategoriesDto> categories) {
 
 		reddit.loadCategoriesList((result) -> {
-
-			categories.setResult(mapper.mapCategories(result.content().get()));
+			categoriesList = result.content().get();
+			categories.setResult(mapper.mapCategories(categoriesList));
 		});
 
 	}
@@ -41,8 +43,13 @@ public class RedditService {
 	public void findSubredditWithCategory(String subredditName, String categoryName,
 			DeferredResult<PageDto> deferredResult) {
 		Subreddit subreddit = reddit.subredditWithName(subredditName);
+		Category category = null;
+		for (Category categoryImpl : categoriesList) {
+			if (categoryImpl.name().equals(categoryName)) {
+				category = categoryImpl;
+			}
+		}
 
-		Category category = new CategoryBuilder().withName(categoryName).build();
 		reddit.loadSubredditNews(subreddit, category, (result) -> {
 			deferredResult.setResult(mapper.mapPage(result.content().get()));
 		});

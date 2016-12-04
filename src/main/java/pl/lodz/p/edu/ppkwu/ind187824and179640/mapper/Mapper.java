@@ -3,7 +3,6 @@ package pl.lodz.p.edu.ppkwu.ind187824and179640.mapper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -30,9 +29,7 @@ public class Mapper {
 			newsDtos.add(newsDto);
 		}
 		
-		PageDto pageDto = new PageDto(newsDtos);
-		
-		return pageDto;
+		return new PageDto(newsDtos);
 		
 		
 	}
@@ -68,9 +65,7 @@ public class Mapper {
 			categoryDtos.add(categoryDto);
 		}
 		
-		CategoriesDto categoriesDto = new CategoriesDto(categoryDtos);
-		
-		return categoriesDto;
+		return new CategoriesDto(categoryDtos);
 	}
 
 }

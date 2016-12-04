@@ -2,7 +2,7 @@
 <html ng-app="reddit">
 	<head>
 		<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" async></script>
+		<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
 		<script src="reddit.js"></script>
@@ -29,7 +29,7 @@
 			</div>
 			<div style="padding: 100px 20px 20px 20px;">
 				<label for="keyword">Keyword:</label> 
-				<input type="text" class="form-control" ng-model="keyword" id="keyword" placeholder="Keywords separated by comma eg. 'hot,popular'">
+				<input type="text" class="form-control" ng-model="keyword" id="keyword" placeholder="Keywords separated by comma">
 				<button type="button" class="btn btn-default" ng-click="searchByKeywords(keyword)">Search</button>
 			</div>
 			<table class="table table-striped">

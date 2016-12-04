@@ -1,9 +1,6 @@
 package pl.lodz.p.edu.ppkwu.ind187824and179640.contoller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,12 +9,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import pl.lodz.p.edu.ppkwu.ind187824and179640.dto.CategoriesDto;
 import pl.lodz.p.edu.ppkwu.ind187824and179640.dto.PageDto;
-import pl.lodz.p.edu.ppkwu.ind187824and179640.mapper.Mapper;
 import pl.lodz.p.edu.ppkwu.ind187824and179640.service.RedditService;
-import pl.lodz.p.iis.ppkwu.reddit.api.Category;
-import pl.lodz.p.iis.ppkwu.reddit.api.News;
-import pl.lodz.p.iis.ppkwu.reddit.api.Page;
-import pl.lodz.p.iis.ppkwu.reddit.api.Result;
 
 @RestController
 public class RedditController {
