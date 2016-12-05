@@ -75,12 +75,13 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			</dependency>
-		
-        <dependency>
+			
+		<!-- Used for testing -->
+<!--         <dependency>
             <groupId>com.github.pl187746</groupId>
             <artifactId>reddit_backend</artifactId>
-            <version>ver.0.0.5</version>
-        </dependency>
+            <version>ver.0.0.6</version>
+        </dependency> -->
 	</dependencies>
 
 	<build>
